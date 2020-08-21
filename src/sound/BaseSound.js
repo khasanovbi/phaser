@@ -434,6 +434,118 @@ var BaseSound = new Class({
     },
 
     /**
+     * Sets the muted state of this Sound.
+     *
+     * @method Phaser.Sound.BaseSound#setMute
+     * @fires Phaser.Sound.Events#MUTE
+     * @since 3.4.0
+     *
+     * @param {boolean} value - `true` to mute this sound, `false` to unmute it.
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound instance.
+     */
+    setMute: function (value)
+    {
+        this.mute = value;
+
+        return this;
+    },
+
+    /**
+     * Sets the volume of this Sound.
+     *
+     * @method Phaser.Sound.BaseSound#setVolume
+     * @fires Phaser.Sound.Events#VOLUME
+     * @since 3.4.0
+     *
+     * @param {number} value - The volume of the sound.
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound instance.
+     */
+    setVolume: function (value)
+    {
+        this.volume = value;
+
+        return this;
+    },
+
+    /**
+     * Sets the playback rate of this Sound.
+     *
+     * For example, a value of 1.0 plays the audio at full speed, 0.5 plays the audio at half speed
+     * and 2.0 doubles the audios playback speed.
+     *
+     * @method Phaser.Sound.BaseSound#setRate
+     * @fires Phaser.Sound.Events#RATE
+     * @since 3.3.0
+     *
+     * @param {number} value - The playback rate at of this Sound.
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound.
+     */
+    setRate: function (value)
+    {
+        this.rate = value;
+
+        return this;
+    },
+
+    /**
+     * Sets the detune value of this Sound, given in [cents](https://en.wikipedia.org/wiki/Cent_%28music%29).
+     * The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
+     *
+     * @method Phaser.Sound.BaseSound#setDetune
+     * @fires Phaser.Sound.Events#DETUNE
+     * @since 3.3.0
+     *
+     * @param {number} value - The range of the value is -1200 to 1200, but we recommend setting it to [50](https://en.wikipedia.org/wiki/50_Cent).
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound.
+     */
+    setDetune: function (value)
+    {
+        this.detune = value;
+
+        return this;
+    },
+
+    /**
+     * Seeks to a specific point in this sound.
+     *
+     * @method Phaser.Sound.BaseSound#setSeek
+     * @fires Phaser.Sound.Events#SEEK
+     * @since 3.4.0
+     *
+     * @param {number} value - The point in the sound to seek to.
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound instance.
+     */
+    setSeek: function (value)
+    {
+        this.seek = value;
+
+        return this;
+    },
+
+    /**
+     * Sets the loop state of this Sound.
+     *
+     * @method Phaser.Sound.BaseSound#setLoop
+     * @fires Phaser.Sound.Events#LOOP
+     * @since 3.4.0
+     *
+     * @param {boolean} value - `true` to loop this sound, `false` to not loop it.
+     *
+     * @return {Phaser.Sound.BaseSound} This Sound instance.
+     */
+    setLoop: function (value)
+    {
+        this.loop = value;
+
+        return this;
+    },
+
+    /**
      * Update method called automatically by sound manager on every game step.
      *
      * @method Phaser.Sound.BaseSound#update

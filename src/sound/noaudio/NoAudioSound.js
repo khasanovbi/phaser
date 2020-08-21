@@ -7,8 +7,6 @@
 
 var BaseSound = require('../BaseSound');
 var Class = require('../../utils/Class');
-var EventEmitter = require('eventemitter3');
-var Extend = require('../../utils/object/Extend');
 
 var returnFalse = function ()
 {
@@ -18,11 +16,6 @@ var returnFalse = function ()
 var returnNull = function ()
 {
     return null;
-};
-
-var returnThis = function ()
-{
-    return this;
 };
 
 /**
@@ -35,6 +28,7 @@ var returnThis = function ()
  * breaking on devices that don't support any audio playback technologies.
  *
  * @class NoAudioSound
+ * @extends Phaser.Sound.BaseSound
  * @memberof Phaser.Sound
  * @constructor
  * @since 3.0.0
@@ -45,35 +39,14 @@ var returnThis = function ()
  */
 var NoAudioSound = new Class({
 
-    Extends: EventEmitter,
+    Extends: BaseSound,
 
     initialize:
 
     function NoAudioSound (manager, key, config)
     {
-        if (config === void 0) { config = {}; }
+        BaseSound.call(this, manager, key, config);
 
-        EventEmitter.call(this);
-
-        this.manager = manager;
-        this.key = key;
-        this.isPlaying = false;
-        this.isPaused = false;
-        this.totalRate = 1;
-        this.duration = 0;
-        this.totalDuration = 0;
-
-        this.config = Extend({
-            mute: false,
-            volume: 1,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false,
-            delay: 0
-        }, config);
-
-        this.currentConfig = this.config;
         this.mute = false;
         this.volume = 1;
         this.rate = 1;
@@ -144,42 +117,7 @@ var NoAudioSound = new Class({
      *
      * @return {boolean} false
      */
-    resume: returnFalse,
-
-    /**
-     * Stop playing this sound.
-     *
-     * @method Phaser.Sound.NoAudioSound#stop
-     * @since 3.0.0
-     *
-     * @return {boolean} false
-     */
-    stop: returnFalse,
-
-    /**
-     * Destroys this sound and all associated events and marks it for removal from the sound manager.
-     *
-     * @method Phaser.Sound.NoAudioSound#destroy
-     * @fires Phaser.Sound.Events#DESTROY
-     * @since 3.0.0
-     */
-    destroy: function ()
-    {
-        BaseSound.prototype.destroy.call(this);
-    },
-
-    setMute: returnThis,
-
-    setVolume: returnThis,
-
-    setRate: returnThis,
-
-    setDetune: returnThis,
-
-    setSeek: returnThis,
-
-    setLoop: returnThis
-
+    resume: returnFalse
 });
 
 module.exports = NoAudioSound;
