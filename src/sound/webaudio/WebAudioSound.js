@@ -682,11 +682,23 @@ var WebAudioSound = new Class({
 
         set: function (value)
         {
-            this.currentConfig.volume = value;
-            this.volumeNode.gain.setValueAtTime(value, 0);
-
-            this.emit(Events.VOLUME, this, value);
+            this.setVolume(value);
         }
+    },
+
+    /**
+     * Sets the volume of this Sound without firing Phaser.Sound.Events#VOLUME.
+     *
+     * @method Phaser.Sound.WebAudioSound#_setVolume
+     * @protected
+     * @since 3.4.0
+     *
+     * @param {number} value - The volume of the sound.
+     */
+    _setVolume: function (value)
+    {
+        BaseSound.prototype._setVolume.call(this, value);
+        this.volumeNode.gain.setValueAtTime(value, 0);
     },
 
     /**
@@ -779,7 +791,7 @@ var WebAudioSound = new Class({
 
             this.emit(Events.LOOP, this, value);
         }
-    },
+    }
 
 });
 

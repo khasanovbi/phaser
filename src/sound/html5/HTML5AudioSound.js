@@ -626,17 +626,27 @@ var HTML5AudioSound = new Class({
 
         set: function (value)
         {
-            this.currentConfig.volume = value;
-
-            if (this.manager.isLocked(this, 'volume', value))
-            {
-                return;
-            }
-
-            this.updateVolume();
-
-            this.emit(Events.VOLUME, this, value);
+            this.setVolume(value);
         }
+    },
+
+    /**
+     * Sets the volume of this Sound without firing Phaser.Sound.Events#VOLUME.
+     *
+     * @method Phaser.Sound.HTML5AudioSound#_setVolume
+     * @protected
+     * @since 3.4.0
+     */
+    _setVolume: function (value)
+    {
+        BaseSound.prototype._setVolume.call(this, value);
+
+        if (this.manager.isLocked(this, 'volume', value))
+        {
+            return;
+        }
+
+        this.updateVolume();
     },
 
     /**
@@ -803,7 +813,7 @@ var HTML5AudioSound = new Class({
             this.emit(Events.LOOP, this, value);
         }
 
-    },
+    }
 
 });
 

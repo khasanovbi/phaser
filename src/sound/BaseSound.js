@@ -138,7 +138,7 @@ var BaseSound = new Class({
          *
          * @name Phaser.Sound.BaseSound#currentConfig
          * @type {Phaser.Types.Sound.SoundConfig}
-         * @private
+         * @protected
          * @since 3.0.0
          */
         this.currentConfig = this.config;
@@ -452,6 +452,44 @@ var BaseSound = new Class({
     },
 
     /**
+     * Gets or sets the volume of this sound, a value between 0 (silence) and 1 (full volume).
+     *
+     * @name Phaser.Sound.BaseSound#volume
+     * @type {number}
+     * @default 1
+     * @fires Phaser.Sound.Events#VOLUME
+     * @since 3.0.0
+     */
+    volume: {
+
+        get: function ()
+        {
+            return this.currentConfig.volume;
+        },
+
+        set: function (value)
+        {
+            this.setVolume(value);
+        }
+    },
+
+    /**
+     * Sets the volume of this Sound without firing Phaser.Sound.Events#VOLUME.
+     *
+     * @method Phaser.Sound.BaseSound#_setVolume
+     * @protected
+     * @since 3.4.0
+     *
+     * @param {number} value - The volume of the sound.
+     */
+    _setVolume: function (value)
+    {
+        this.currentConfig.volume = value;
+
+        return this;
+    },
+
+    /**
      * Sets the volume of this Sound.
      *
      * @method Phaser.Sound.BaseSound#setVolume
@@ -464,8 +502,8 @@ var BaseSound = new Class({
      */
     setVolume: function (value)
     {
-        this.volume = value;
-
+        this._setVolume(value);
+        this.emit(Events.VOLUME, this, value);
         return this;
     },
 
